@@ -24,6 +24,7 @@ func main() {
 	checkErr(err)
 	files, err := utility.FilteredSearchOfDirectoryTree(re, inDir)
 	checkErr(err)
+	checkErr(os.MkdirAll(outDir, 0o755))
 	for _, file := range files {
 		p, err := process.New(file)
 		// заполняем короба палеты и КМ
