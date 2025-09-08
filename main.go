@@ -2,6 +2,7 @@ package main
 
 import (
 	"agregat/process"
+	"agregat/processall"
 	"log"
 	"os"
 	"regexp"
@@ -25,6 +26,8 @@ func main() {
 	files, err := utility.FilteredSearchOfDirectoryTree(re, inDir)
 	checkErr(err)
 	checkErr(os.MkdirAll(outDir, 0o755))
+	pAll, err := processall.New()
+	checkErr(err)
 	for _, file := range files {
 		p, err := process.New(file)
 		// заполняем короба палеты и КМ
@@ -33,5 +36,10 @@ func main() {
 		checkErr(err)
 		err = p.Save(outDir)
 		checkErr(err)
+		err = pAll.Add(file)
+		checkErr(err)
 	}
+	err = pAll.ScanAll()
+	checkErr(err)
+	err = pAll.Save(outDir)
 }

@@ -6,7 +6,6 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 func (p *process) Save(out string) error {
@@ -16,34 +15,24 @@ func (p *process) Save(out string) error {
 	if err := saveKM(fileNameKM, p.arrKM); err != nil {
 		return fmt.Errorf("error write file utility %w", err)
 	}
-	fileNameKoroba := "koroba_" + p.NameFileWithoutExt + ".csv"
-	fileNameKoroba = filepath.Join(out, fileNameKoroba)
-	if err := saveTxt(fileNameKoroba, p.ListKoroba); err != nil {
-		return fmt.Errorf("error write file koroba %w", err)
-	}
-	fileNamePalet := "palet_" + p.NameFileWithoutExt + ".csv"
-	fileNamePalet = filepath.Join(out, fileNamePalet)
-	if err := saveTxt(fileNamePalet, p.ListPalet); err != nil {
-		return fmt.Errorf("error write file palet %w", err)
-	}
 	return nil
 }
 
-func saveTxt(name string, data [][]string) error {
-	file, err := os.Create(name)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
+// func saveTxt(name string, data [][]string) error {
+// 	file, err := os.Create(name)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	defer file.Close()
 
-	for _, row := range data {
-		_, err = fmt.Fprintf(file, "%s\n", strings.Join(row, "\t"))
-		if err != nil {
-			return fmt.Errorf("failed to write to file: %v", err)
-		}
-	}
-	return nil
-}
+// 	for _, row := range data {
+// 		_, err = fmt.Fprintf(file, "%s\n", strings.Join(row, "\t"))
+// 		if err != nil {
+// 			return fmt.Errorf("failed to write to file: %v", err)
+// 		}
+// 	}
+// 	return nil
+// }
 
 func saveKM(name string, data []string) error {
 	file, err := os.Create(name)
