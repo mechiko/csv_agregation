@@ -21,6 +21,11 @@ func checkErr(e error) {
 }
 
 func main() {
+	err := os.RemoveAll(outDir)
+	checkErr(err)
+	// Recreate the empty directory
+	err = os.MkdirAll(outDir, 0755) // 0755 provides read/write/execute permissions for owner, read/execute for group and others
+	checkErr(err)
 	re, err := regexp.Compile(`.*\.csv$`)
 	checkErr(err)
 	files, err := utility.FilteredSearchOfDirectoryTree(re, inDir)
