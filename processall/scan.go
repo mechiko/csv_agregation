@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -91,12 +92,17 @@ func readStringArray(filePath string) ([][]string, error) {
 	arr := make([][]string, 0)
 	scanner := bufio.NewScanner(f)
 	// optionally, resize scanner's capacity for lines over 64K, see next example
+	index := 0
 	for scanner.Scan() {
-		txt := strings.Split(scanner.Text(), "\t")
-		if len(txt) != 3 {
-			return nil, fmt.Errorf("полей в каждой строке файла должно быть три")
+		readTxt := scanner.Text()
+		if readTxt != "" {
+			txt := strings.Split(readTxt, "\t")
+			if len(txt) != 3 {
+				return nil, fmt.Errorf("полей в каждой строке [%d] файла должно быть три %s", index, filepath.Base(filePath))
+			}
+			arr = append(arr, txt)
 		}
-		arr = append(arr, txt)
+		index++
 	}
 	if err := scanner.Err(); err != nil {
 		return nil, fmt.Errorf("ошибка сканера %w", err)

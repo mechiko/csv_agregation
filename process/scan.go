@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -20,6 +21,12 @@ func (p *process) Scan() error {
 		record, err := NewRecord(row)
 		if err != nil {
 			return fmt.Errorf("ошибка record %w", err)
+		}
+		if p.Gtin == "" {
+			p.Gtin = record.Cis.Gtin
+		}
+		if p.Gtin != record.Cis.Gtin {
+			return fmt.Errorf("gtin записи %s отличается от gtin первой строки %s [строка %d файла %s]", record.Cis.Gtin, p.Gtin, i+1, p.File)
 		}
 		if _, ok := p.KM[record.Cis.Cis]; ok {
 			return fmt.Errorf("ошибка дубликат %d [%s] record  %w", i, record.Cis.Cis, err)
@@ -78,12 +85,17 @@ func readStringArray(filePath string) ([][]string, error) {
 	arr := make([][]string, 0)
 	scanner := bufio.NewScanner(f)
 	// optionally, resize scanner's capacity for lines over 64K, see next example
+	index := 0
 	for scanner.Scan() {
-		txt := strings.Split(scanner.Text(), "\t")
-		if len(txt) != 3 {
-			return nil, fmt.Errorf("полей в каждой строке файла должно быть три")
+		readTxt := scanner.Text()
+		if readTxt != "" {
+			txt := strings.Split(readTxt, "\t")
+			if len(txt) != 3 {
+				return nil, fmt.Errorf("полей в каждой строке [%d] файла должно быть три %s", index, filepath.Base(filePath))
+			}
+			arr = append(arr, txt)
 		}
-		arr = append(arr, txt)
+		index++
 	}
 	if err := scanner.Err(); err != nil {
 		return nil, fmt.Errorf("ошибка сканера %w", err)

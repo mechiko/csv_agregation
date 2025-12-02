@@ -11,6 +11,7 @@ import (
 type process struct {
 	NameFileWithoutExt string
 	File               string
+	Gtin               string
 	Koroba             map[string][]*utility.CisInfo
 	Palet              map[string]map[string]string
 	KM                 map[string]string
