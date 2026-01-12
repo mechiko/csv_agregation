@@ -5,7 +5,9 @@ import (
 	"agregat/processall"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
+	"strings"
 
 	"github.com/mechiko/utility"
 )
@@ -34,6 +36,8 @@ func main() {
 	pAll, err := processall.New()
 	checkErr(err)
 	for _, file := range files {
+		name := strings.TrimSuffix(filepath.Base(file), filepath.Ext(file))
+		pAll.NameFileWithoutExt = name
 		p, err := process.New(file)
 		// заполняем короба палеты и КМ
 		checkErr(err)
@@ -46,5 +50,5 @@ func main() {
 	}
 	err = pAll.ScanAll()
 	checkErr(err)
-	err = pAll.Save(outDir)
+	pAll.Save(outDir)
 }

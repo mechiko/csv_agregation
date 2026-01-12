@@ -9,13 +9,38 @@ import (
 )
 
 func (p *process) Save(out string) error {
-	fileNameKM := "Utility_" + p.NameFileWithoutExt + ".csv"
-	fileNameKM = filepath.Join(out, fileNameKM)
-
-	if err := saveKM(fileNameKM, p.arrKM); err != nil {
-		return fmt.Errorf("error write file utility %w", err)
+	fileNameKM := "нанесение_" + p.NameFileWithoutExt + ".csv"
+	index := 0
+	for {
+		cis := nextRecords(p.arrKM, index, 30000)
+		if len(cis) == 0 {
+			break
+		}
+		fn := fmt.Sprintf("%02d_%s", index+1, fileNameKM)
+		fn = filepath.Join(out, fn)
+		if err := saveKM(fn, cis); err != nil {
+			return fmt.Errorf("error write file utility %w", err)
+		}
+		index++
 	}
+
 	return nil
+}
+
+// index from 0 startIndex 0
+// nextRecords returns a batch of records starting from startIndex
+// Returns empty slice when no more records are available
+func nextRecords(arr []string, index int, count int) []string {
+	startIndex := index * count
+	if startIndex >= len(arr) {
+		return []string{}
+	}
+	endIndex := startIndex + count
+	// если последний индекс больше длины массива укорачиваем до размера массива
+	if endIndex > len(arr) {
+		endIndex = len(arr)
+	}
+	return arr[startIndex:endIndex]
 }
 
 // func saveTxt(name string, data [][]string) error {

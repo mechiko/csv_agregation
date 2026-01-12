@@ -13,12 +13,12 @@ import (
 
 func (p *process) Save(out string) error {
 	rand8 := utility.String(8)
-	fileNameKoroba := "koroba_" + p.NameFileWithoutExt + "_" + rand8 + ".csv"
+	fileNameKoroba := "коробки_" + p.NameFileWithoutExt + "_" + rand8 + ".csv"
 	fileNameKoroba = filepath.Join(out, fileNameKoroba)
 	if err := saveTxt(fileNameKoroba, p.ListKoroba); err != nil {
 		return fmt.Errorf("error write file koroba %w", err)
 	}
-	fileNamePalet := "palet_" + p.NameFileWithoutExt + "_" + rand8 + ".csv"
+	fileNamePalet := "палеты_" + p.NameFileWithoutExt + "_" + rand8 + ".csv"
 	fileNamePalet = filepath.Join(out, fileNamePalet)
 	if err := saveTxt(fileNamePalet, p.ListPalet); err != nil {
 		return fmt.Errorf("error write file palet %w", err)
