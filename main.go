@@ -28,11 +28,12 @@ func main() {
 	// Recreate the empty directory
 	err = os.MkdirAll(outDir, 0755) // 0755 provides read/write/execute permissions for owner, read/execute for group and others
 	checkErr(err)
-	re, err := regexp.Compile(`.*\.csv$`)
+	re, err := regexp.Compile(`.*\.*$`)
 	checkErr(err)
 	files, err := utility.FilteredSearchOfDirectoryTree(re, inDir)
 	checkErr(err)
 	checkErr(os.MkdirAll(outDir, 0o755))
+	// name := []rune(filepath.Base(files[0]))
 	pAll, err := processall.New()
 	checkErr(err)
 	for _, file := range files {

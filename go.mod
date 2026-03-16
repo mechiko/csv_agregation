@@ -1,10 +1,8 @@
 module agregat
 
-go 1.24
+go 1.25.5
 
-toolchain go1.24.6
-
-require github.com/mechiko/utility v0.0.0-20250821050810-49544d80570c
+require github.com/mechiko/utility v0.0.0-20250901141646-cc9c20f08412
 
 require (
 	github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf // indirect

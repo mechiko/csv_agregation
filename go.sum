@@ -2,8 +2,8 @@ github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf h1:FPsprx82rdrX2j
 github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf/go.mod h1:peYoMncQljjNS6tZwI9WVyQB3qZS6u79/N3mBOcnd3I=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/mechiko/utility v0.0.0-20250821050810-49544d80570c h1:eo0oERdWItwKFCqCwyGwOb4gYCBGpXjrg1Cp3hMd/ps=
-github.com/mechiko/utility v0.0.0-20250821050810-49544d80570c/go.mod h1:UiKyo/JZJxMeY0d+QYo467GGVMADRDnH41q4iJaKoUc=
+github.com/mechiko/utility v0.0.0-20250901141646-cc9c20f08412 h1:tSsBWXfycoRsuKIGbupznOwY3/n+WOKSJR5UoIpuFUE=
+github.com/mechiko/utility v0.0.0-20250901141646-cc9c20f08412/go.mod h1:UiKyo/JZJxMeY0d+QYo467GGVMADRDnH41q4iJaKoUc=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sqweek/dialog v0.0.0-20240226140203-065105509627 h1:2JL2wmHXWIAxDofCK+AdkFi1KEg3dgkefCsm7isADzQ=
